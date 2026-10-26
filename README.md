@@ -3,7 +3,7 @@
 Ril membuka halaman toko (bawaan: gudang) layar penuh, tanpa alamat URL, tab, klik kanan, atau
 DevTools. Hanya server toko yang bisa dibuka. Bar atas: jam, baterai, **Muat ulang**, **Matikan**.
 
-**Menu pemilik:** tombol **⚙ Pengaturan** di kanan atas (atau klik tulisan **Ril** 5 kali / Ctrl+Shift+Alt+R),
+**Menu pemilik:** klik tulisan **Ril** di kiri atas 5 kali dalam 3 detik (atau Ctrl+Shift+Alt+R),
 lalu PIN pemilik. Isi: muat ulang, ubah alamat server, Wi-Fi, ganti PIN, status,
 buka desktop Windows (perawatan), keluar akun, mulai ulang.
 

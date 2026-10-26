@@ -36,7 +36,6 @@ public class FormUtama : Form
         // bar atas: kiri logo + info, kanan tombol
         var kanan = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, Padding = new Padding(0, 4, 0, 0) };
         kanan.Controls.Add(TombolBar("⟳  Muat ulang", (_, _) => MuatUlang()));
-        kanan.Controls.Add(TombolBar("⚙  Pengaturan", (_, _) => MenuPemilik()));   // butuh PIN pemilik
         kanan.Controls.Add(TombolBar("⏻  Matikan", (_, _) => Matikan()));
         var kiri = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, Padding = new Padding(0, 8, 0, 0) };
         kiri.Controls.Add(logo);
@@ -125,7 +124,9 @@ public class FormUtama : Form
         };
         web.CoreWebView2.NavigationCompleted += (_, e) =>
         {
-            if (e.IsSuccess) { galat.Visible = false; coba.Stop(); }
+            // Halaman yang dijawab server dengan 4xx/5xx (mis. 403 "Perangkat belum disetujui") tetap ditampilkan:
+            // IsSuccess memang false untuk itu, tapi server terjangkau. Layar galat hanya untuk yang tidak ada jawaban.
+            if (e.IsSuccess || e.HttpStatusCode > 0) { galat.Visible = false; coba.Stop(); }
             else if (e.WebErrorStatus != CoreWebView2WebErrorStatus.OperationCanceled)
                 TampilGalat("Tidak tersambung ke server toko.\n\nPastikan Wi-Fi menyala dan Tailscale tersambung.\nRil mencoba lagi otomatis setiap 5 detik.");
         };
