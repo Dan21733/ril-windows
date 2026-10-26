@@ -36,6 +36,7 @@ public class FormUtama : Form
         // bar atas: kiri logo + info, kanan tombol
         var kanan = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, Padding = new Padding(0, 4, 0, 0) };
         kanan.Controls.Add(TombolBar("⟳  Muat ulang", (_, _) => MuatUlang()));
+        kanan.Controls.Add(TombolBar("⚙  Pengaturan", (_, _) => MenuPemilik()));   // butuh PIN pemilik
         kanan.Controls.Add(TombolBar("⏻  Matikan", (_, _) => Matikan()));
         var kiri = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, Padding = new Padding(0, 8, 0, 0) };
         kiri.Controls.Add(logo);
@@ -219,7 +220,7 @@ public class FormUtama : Form
         });
         menu.Items.Add("Keluar akun (sign out)", null, (_, _) => { if (Tanya.Ya(this, "Keluar akun", "Keluar dari akun Windows ini?")) Jalankan("shutdown", "/l"); });
         menu.Items.Add("Mulai ulang laptop", null, (_, _) => { if (Tanya.Ya(this, "Mulai ulang", "Mulai ulang laptop sekarang?")) Jalankan("shutdown", "/r /t 0"); });
-        menu.Show(logo, new Point(0, logo.Height + 8));
+        menu.Show(Cursor.Position);
     }
 
     void UbahAlamat()
